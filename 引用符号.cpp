@@ -27,4 +27,6 @@ int main(){
     printf("y调用referenceY前 y=%d\n",y);
     referenceY(y);
     printf("y调用referenceY后 y=%d\n",y);
+
+    return 0;
 }

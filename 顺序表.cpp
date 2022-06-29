@@ -1,5 +1,5 @@
 /**
- * @brief 本文实现了:创建一个顺序表,并且提供插入、删除操作。
+ * @brief 本文实现了:创建一个顺序表,并且提供插入、删除操作。顺序表按位序1开始。
  *
  * @author zhonghu e
  *
@@ -74,8 +74,24 @@ bool ListDelete(SeqList &L, int i , int &e) {
         L.data[j-1] = L.data[j];
     }
     L.length--;
-    return true;
+;    return true;
 }
+
+//顺序表按位查找
+int GetElem(SeqList L, int i) {
+    return L.data[i-1];
+}
+
+//顺序表按值查找
+int locateElem(SeqList L, int e) {
+    //遍历比较
+    for(int i=0; i<L.length ; i++){
+        if (L.data[i]==e){  //注意:结构类型无法比较
+            return i+1;  //因为要返回位序,所以加1
+        }
+    }
+    return 0;
+};
 
 int main() {
     SeqList L;  //创建实例模板,称为L
@@ -88,7 +104,7 @@ int main() {
     ListInsert(L, 5, 5);
     //ListDelete(L, 1, e)
     //遍历输出线性表
-    cout << "当前顺序表:";
+    cout << "原始顺序表:";
     for (int k=0; k<L.length ; k++) {
         cout << L.data[k] << ",";
     }
@@ -116,5 +132,11 @@ int main() {
     IncreaseSize(L,3);
     cout << "扩容后最大储存长度:" << L.MaxSize << endl;
 
+    //按位查找
+    cout << GetElem(L, 3) << endl;
+    
+    //按值查找
+    cout << locateElem(L,5) << endl;
+    
     return 0;
 }
