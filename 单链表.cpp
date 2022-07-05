@@ -19,7 +19,7 @@ typedef struct LNode {
 //初始化结点(带头结点)
 bool InitList(LinkList &L) {
     L = (LNode *) malloc(sizeof(LNode));  //分配一个头结点,返回指向这个单链表的头结点的指针
-    if (L == NULL) {  //内存不足,分配失败
+    if (L == NULL) {  //返回为NULL：内存不足,分配失败
         return false;
     }
     L->next = NULL; //头结点指针域指向NULL,不存数据,因为之后暂时还没有结点
@@ -29,7 +29,7 @@ bool InitList(LinkList &L) {
 //按位查找,返回第i个LNode结点的指向(带头节点)
 LNode * GetElem(LinkList L, int i) {
     if (i<0) {
-        return false;
+        return NULL;
     }
     LNode *p;  //指针p指向当前扫描的结点
     int j=0;  //当前p指向的是第几个结点
