@@ -1,7 +1,7 @@
 /**
  * @brief 本文实现了:创建一个顺序表,并且提供插入、删除操作。顺序表按位序1开始。
  *
- * @author zhonghu e 1
+ * @author zhonghu e
  *
  * Contact: ezhonghu@qq.com
  */
