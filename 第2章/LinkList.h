@@ -13,9 +13,9 @@
 using namespace std;
 
 //定义结点
-//┌─────────┐
-//│data│next│
-//└─────────┘
+//┌──────────┐
+//│data│next*│
+//└──────────┘
 typedef struct LNode {
     //一个结点由data+next组成
     int data;  //存放数据(数据域)
@@ -160,7 +160,7 @@ LinkList List_TailInsert(LinkList &L, int e) {
     while (x!=9999) {  //输入9999表示结束输入
         s = (LNode *)malloc(sizeof(LNode));
         s->data = x;
-        r->next = s;
+        r->next = s;  //上一个表尾结点
         r = s;  //r指向新的表尾结点
         scanf("%d", &x);
     }
@@ -168,16 +168,16 @@ LinkList List_TailInsert(LinkList &L, int e) {
     return L;
 }
 
-
+赋元素值
 // 已知一维数组A[n]中存有线性表的数据元素,利用头插法创建单链表L
 bool CreateList_L_Front(LinkList &L,int a[],int n ) {
     LNode *p; 
     int i;
     for(i=n-1; i>=0; i--) {
         p = (LNode *)malloc(sizeof(LNode)); //创建新结点
-        p->data=a[i];    // 赋元素值
-        p->next=L->next;  // 插入在头结点和第一个结点之间
-        L->next=p; 
+        p->data=a[i];    // 数据域赋值
+        p->next=L->next;  //新结点的指针指向原来L指向的位置
+        L->next=p;   //L指针指向新结点
     }
     return 0;
 }

@@ -2,7 +2,6 @@
  * @brief 单链表操作示范
  *
  * @author zhonghu e
- *
  * Contact: ezhonghu@qq.com
  */
 
