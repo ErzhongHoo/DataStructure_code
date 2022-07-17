@@ -1,5 +1,5 @@
 /**
- * @brief 单链表初始化、插入、删除、查找
+ * @brief 单链表结构定义、初始化、插入、删除、查找
  *
  * @author zhonghu e
  *
@@ -12,6 +12,7 @@
 
 using namespace std;
 
+
 //定义结点
 //┌──────────┐
 //│data│next*│
@@ -21,6 +22,8 @@ typedef struct LNode {
     int data;  //存放数据(数据域)
     struct LNode *next;  //指针指向下一个结点(指针域)
 }LNode, *LinkList;  //LNode *强调结点指针, LinkList强调单链表,其实等价,区分是为了让可读性更高
+ 
+LNode * tail;  //表尾指针
 
 //初始化结点(带头结点)
 bool InitList(LinkList &L) {
@@ -44,6 +47,7 @@ LNode * GetElem(LinkList L, int i) {
     while (p!=NULL && j<i) {
         j++;  //遍历直到i的前一个结点停下,或到表尾
     }
+    cout << p->data << endl;
     return p;
 }
 
@@ -168,10 +172,10 @@ LinkList List_TailInsert(LinkList &L, int e) {
     return L;
 }
 
-赋元素值
 // 已知一维数组A[n]中存有线性表的数据元素,利用头插法创建单链表L
+// 头插法缺点:输入顺序和存入顺序相反
 bool CreateList_L_Front(LinkList &L,int a[],int n ) {
-    LNode *p; 
+    LNode *p;  
     int i;
     for(i=n-1; i>=0; i--) {
         p = (LNode *)malloc(sizeof(LNode)); //创建新结点
@@ -179,6 +183,8 @@ bool CreateList_L_Front(LinkList &L,int a[],int n ) {
         p->next=L->next;  //新结点的指针指向原来L指向的位置
         L->next=p;   //L指针指向新结点
     }
+    tail = p;
+    cout << "表尾地址:" << tail << endl;
     return 0;
 }
 
@@ -197,24 +203,24 @@ bool ListDelete(LinkList &L, int i, int &e) {
        j++;
    }
 
-   // GetElem(L, i-1);
-   //
-   // if (p==NULL) {
-   //     return false;
-   // }
-   //
-   // if (p->next == NULL){
-   //     return false;
-   // }
+   //GetElem(L, i-1);
+
+   if (p==NULL) {
+       return false;
+   }
+
+   if (p->next == NULL){
+       return false;
+   }
 
    //...-> a(i-1) -> a(i) ->a(i+1) -> ...
    //      |                ^
    //      ---------------->|
-   //      p         q
-   LNode *q = p->next;  //q指的是要被删除的那个结点
+   //      p         q       
+   LNode *q = p->next;  //q指向p的后继(i)
    e = q->data;  //暂存被删除的内容
    p->next = q->next;  //i-1直接指向i+1个结点(跳过i结点)
-   free(q);
+   free(q);  //q在这个函数中只充当中间人的角色,使用后释放
    return true;
 }
 
@@ -250,11 +256,12 @@ bool DeleteNode(LNode *p) {
 //    return L;
 //}
         
-
-void ShowList(LinkList L) {  //输出链表内容
-   while(L) {
-     printf("%d ",L->data);
-     L=L->next;
-   }
-   printf("\n");
+//输出链表内容
+void ShowList(LinkList L) {  
+    cout << "表:";
+    while(L) {
+      printf("%d ",L->data);
+      L=L->next;
+    }
+    printf("\n");
 }
